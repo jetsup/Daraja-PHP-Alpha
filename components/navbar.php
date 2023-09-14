@@ -1,9 +1,10 @@
-<header>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products and Services</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contacts</a></li>
-        </ul>
-    </header>
+<div class="navbar">
+    <ul>
+        <li><a href="index.php" class="nav-link">Home</a></li>
+        <li><a href="products.php" class="nav-link">Products and Services</a></li>
+        <li><a href="about.php" class="nav-link">About Us</a></li>
+        <li><a href="news.php" class="nav-link">News</a></li>
+        <li><a href="contacts.php" class="nav-link">Contacts</a></li>
+        <li><a href="cart.php" class="nav-link">Cart</a></li>
+    </ul>
+</div>

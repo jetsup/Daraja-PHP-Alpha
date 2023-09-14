@@ -1,0 +1,42 @@
+body{
+    background: #343041;
+}
+/* Reset default list styles */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    /* Display the links in a single row */
+    justify-content: space-around;
+    /* Distribute the links evenly */
+    align-items: center;
+    /* Center align vertically within the navbar */
+    padding: 10px 0;
+}
+/* Reset default list styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation bar */
+nav {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Style the navigation links */
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+/* Style the active link */
+.nav-link.active {
+    background-color: #ff6600;
+    /* Change to the color you want for the active tab */
+    border-radius: 5px;
+}
