@@ -13,6 +13,9 @@
     include 'components/navbar.php';
     ?>
     <?php
+    
+    ?>
+    <?php
     include 'components/footer.php';
     ?>
 </body>

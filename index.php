@@ -12,14 +12,17 @@
     <?php
     include 'components/navbar.php';
     include 'database/db_connection.php';
-    $sql = "SELECT * from users";
+    
+    $sql ="SELECT * from products";
     $result = $con->query($sql);
-    if ($result->num_rows > 0) {
-        echo "<table><tr><th>ID</th><th>Username</th><th>Password</th></tr>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["id"] . "</td><td>" . $row["username"] . "</td><td>" . $row["password"] . "</td></tr>";
-        }
-        echo "</table>";
+    while ($row = $result->fetch_assoc()) {
+        $productImageURL = $row["product_image_url"];
+        $productName = $row["product_name"];
+        $productPrice = $row["product_price"];
+        $productPreviousPrice = $row["product_previous_price"];
+        $productDescription = $row["product_description"];
+
+        include "components/display/item.php";
     }
     ?>
     <?php
