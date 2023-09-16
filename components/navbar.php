@@ -8,7 +8,7 @@
         <!-- <li><a href="cart.php" class="nav-link">Cart</a></li> -->
         <?php
         if (isset($_SESSION["user_id"])) {
-            echo "<li><a href='cart.php' class='nav-link'>Cart</a></li>";
+            echo "<li><a href='components/shop/cart.php' class='nav-link'>Cart</a></li>";
             echo "<li><a href='logins/logout.php' class='nav-link'>Logout</a></li>";
         } else {
             echo "<li><a href='logins/login.php' class='nav-link'>Login</a></li>";

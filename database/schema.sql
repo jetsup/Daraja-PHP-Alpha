@@ -76,3 +76,12 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (user_id) REFERENCES user_details(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+
+-- Table for the wishlist
+CREATE TABLE IF NOT EXISTS wishlist (
+    wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
