@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +15,12 @@
     <?php
     include 'components/navbar.php';
     include 'database/db_connection.php';
+    $selectedProductID = -1; //update so that it can be used in the item_view.php
     
-    $sql ="SELECT * from products";
+    $sql = "SELECT * from products";
     $result = $con->query($sql);
     while ($row = $result->fetch_assoc()) {
+        $productID = $row["product_id"];
         $productImageURL = $row["product_image_url"];
         $productName = $row["product_name"];
         $productPrice = $row["product_price"];
@@ -30,5 +35,10 @@
     ?>
 </body>
 <script src="index.js"></script>
+<script>
+    function viewDetails() {
+        window.location.href = "item_view.php";
+    }
+</script>
 
 </html>

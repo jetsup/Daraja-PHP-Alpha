@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item" onclick="viewDetails()">
     <img src="<?php echo $productImageURL ?>" alt="Product Image">
     <h3>
         <?php echo $productName; ?>
