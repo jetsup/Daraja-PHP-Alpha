@@ -27,6 +27,11 @@ session_start();
         $productPreviousPrice = $row["product_previous_price"];
         $productDescription = $row["product_description"];
 
+        $selectedProductID = $productID;
+
+        // Generate a unique ID for the "View Details" button
+        $buttonID = "viewButton_$productID";
+
         include "components/display/item.php";
     }
     ?>
@@ -36,8 +41,8 @@ session_start();
 </body>
 <script src="index.js"></script>
 <script>
-    function viewDetails() {
-        window.location.href = "item_view.php";
+    function viewDetails(productID) {
+        window.location.href = "item_view.php?productID=" + productID;
     }
 </script>
 
