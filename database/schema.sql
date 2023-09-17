@@ -22,8 +22,7 @@ CREATE TABLE users (
     user_log_password VARCHAR(65) NOT NULL, -- store the passwords in hashed form SHA256
     user_id INT NOT NULL,
     user_log_role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
-    
-FOREIGN KEY(user_id) REFERENCES user_details(user_id)
+    FOREIGN KEY(user_id) REFERENCES user_details(user_id) ON DELETE CASCADE
 );
 
 INSERT IGNORE INTO users (username, user_log_password, user_id) VALUES
@@ -52,37 +51,37 @@ INSERT IGNORE INTO products (product_name, product_price, product_previous_price
 -- Hold the alternative images of the same product for setails
 CREATE TABLE IF NOT EXISTS product_images (
     product_image_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT NOT NULL,
+    product_id INT,
     product_image_url VARCHAR(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
 
 -- Hold the cart items by specific user
 CREATE TABLE IF NOT EXISTS cart_items (
     cart_item_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user_details(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    product_id INT,
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
 
 -- Table to handle user orders and the location of their deliveries
 CREATE TABLE IF NOT EXISTS orders (
     order_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    product_id INT NOT NULL,
+    product_id INT,
     order_quantity INT NOT NULL,
     order_total DECIMAL(10, 2) NOT NULL,
     order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user_details(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
 
 -- Table for the wishlist
 CREATE TABLE IF NOT EXISTS wishlist (
     wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user_details(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    product_id INT ,
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );

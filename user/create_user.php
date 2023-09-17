@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($con->query($sql) === TRUE) {
         echo "Account created successfully!";
         unset($_SESSION["registration_user_id"]);
-        header("Location: login.php");
+        header("Location: ../signin.php");
         exit();
     } else {
         $sql = "DELETE FROM user_details WHERE user_id = $id";
