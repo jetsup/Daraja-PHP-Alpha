@@ -50,7 +50,7 @@ if (isset($_GET['querySelectedItems'])) {
         }
         echo "<p>Total: $<span id='total-price'>0.00</span></p>";
         echo "<p>Total Items: <span class='total'>$checkItems</span></p>";
-        echo "<button id='checkout-button' onclick='checkout()'>Checkout ($checkItems)</button>";
+        echo "<button id='checkout-button'>Checkout ($checkItems)</button>";
     } else {
         echo "<p>Your cart is empty.</p>";
     }
@@ -161,7 +161,6 @@ if (isset($_GET['querySelectedItems'])) {
             document.querySelector("#checkout-button").innerText = `Checkout (${totalItems.innerText})`;
         }
     });
-    function checkout() { }
 </script>
 
 </html>
