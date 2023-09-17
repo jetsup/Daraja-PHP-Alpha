@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS products (
     product_name VARCHAR(100) NOT NULL UNIQUE,
     product_price DECIMAL(10, 2) NOT NULL,
     product_previous_price DECIMAL(10, 2) NOT NULL,
+    products_in_stock INT NOT NULL DEFAULT 0,
     product_discount DECIMAL(3, 2) DEFAULT 0,
     product_description VARCHAR(255) NOT NULL,
     product_image_url VARCHAR(255) NOT NULL
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS cart_items (
     cart_item_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     product_id INT,
+    product_quantity INT NOT NULL DEFAULT 1,
     FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
@@ -69,12 +71,11 @@ CREATE TABLE IF NOT EXISTS cart_items (
 CREATE TABLE IF NOT EXISTS orders (
     order_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    product_id INT,
-    order_quantity INT NOT NULL,
-    order_total DECIMAL(10, 2) NOT NULL,
+    product_ids JSON NOT NULL,
+    product_quantities JSON NOT NULL,
+    order_total_price DECIMAL(10, 2) NOT NULL,
     order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE
 );
 
 -- Table for the wishlist
