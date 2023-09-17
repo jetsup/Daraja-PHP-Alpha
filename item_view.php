@@ -8,7 +8,7 @@ if (isset($_COOKIE["product_to_cart_cookie"])) {
 
     // check if the item is in the cart
     $sql = "SELECT * FROM cart_items WHERE user_id = $user_id AND product_id = $productID";
-    $result = $con->query($sql);
+    $result = $con ->query($sql);
     if ($result->num_rows > 0) {
         // the item is already in the cart
         echo "<script>console.log('Item already in cart')</script>";

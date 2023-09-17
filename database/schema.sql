@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS products (
     product_name VARCHAR(100) NOT NULL UNIQUE,
     product_price DECIMAL(10, 2) NOT NULL,
     product_previous_price DECIMAL(10, 2) NOT NULL,
+    product_discount DECIMAL(3, 2) DEFAULT 0,
     product_description VARCHAR(255) NOT NULL,
     product_image_url VARCHAR(255) NOT NULL
 );

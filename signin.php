@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    include "../database/db_connection.php";
+    include "database/db_connection.php";
 
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $user_password) {
             // store the user_id in a session variable
             $_SESSION["user_id"] = $user_id;
-            header("Location: ../index.php");
+            header("Location: index.php");
             exit();
         } else {
             $error_message = "Invalid username or password.";
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jack Daniels - Login</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>$error_message</p>";
     }
     ?>
-    <form action="login.php" method="post">
+    <form action="signin.php" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
 
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" id="password" name="password" required><br><br>
 
         <input type="submit" value="Login">
-        <p>Don't have an account? <a href="signup.php"><i>signup</i></a></p>
+        <p>Don't have an account? <a href="register.php"><i>signup</i></a></p>
     </form>
 </body>
 
