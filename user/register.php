@@ -41,12 +41,12 @@ $con->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <h2>Signup</h2>
-    <form action="signup.php" method="post" onsubmit="return verifyInputs()">
+    <form action="register.php" method="post" onsubmit="return verifyInputs()">
         <label for="user_first_name">First Name:</label>
         <input type="text" id="user_first_name" name="user_first_name" required><br><br>
 

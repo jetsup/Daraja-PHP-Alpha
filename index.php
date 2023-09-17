@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'database/db_connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,6 @@ session_start();
 <body>
     <?php
     include 'components/navbar.php';
-    include 'database/db_connection.php';
     $selectedProductID = -1; //update so that it can be used in the item_view.php
     
     $sql = "SELECT * from products";
