@@ -4,7 +4,7 @@ include '../../database/db_connection.php';
 
 if (isset($_GET['queryType'])) {
     $queryType = $_GET['queryType'];
-    if ($queryType == "checkout") {
+    if ($queryType == "processPayment") {
         $productIDsJSON = isset($_GET['productIDs']) ? $_GET['productIDs'] : "";
         // TODO: Remove quantities from the parameters and use the quantities already in DB
         $quantitiesJSON = isset($_GET['quantities']) ? $_GET['quantities'] : "";
@@ -25,14 +25,15 @@ if (isset($_GET['queryType'])) {
                 $totalPrice += ($productPrice - $productDiscount) * $quantity;
             }
 
-            // save the order to the database
+            // save the order to the pending order tabe in database
             $user_id = $_SESSION["user_id"];
-            $sql = "INSERT INTO orders (user_id, product_ids, product_quantities, order_total_price) VALUES ($user_id, '$productIDsJSON', '$quantitiesJSON', $totalPrice)";
+            $sql = "INSERT INTO pending_orders (user_id, product_ids, product_quantities, order_total_price) VALUES ($user_id, '$productIDsJSON', '$quantitiesJSON', $totalPrice)";
             $result = $con->query($sql);
             if (!$result) {
                 echo "Order not placed. Error: $con->error";
             }
-            echo "Data received successfully!";
+            $pendingOrderID = $result->fetch_assoc()["pending_order_id"];
+            echo "Payment pending for order NO.: $pendingOrderID";
         } else {
             // Handle the case where data was not received or is empty.
             echo "Data not received or is empty.";
@@ -45,13 +46,13 @@ if (isset($_GET['queryType'])) {
         $sql = "SELECT * FROM cart_items WHERE user_id = $user_id AND product_id = $productID";
         $result = $con->query($sql);
         if ($result->num_rows > 0) {
-            echo "Item already in cart";
+            echo "Item with ID '$productID' already in cart";
         } else {
             $sql = "INSERT INTO cart_items (user_id, product_id) VALUES ($user_id, $productID)";
             if (!$con->query($sql)) {
                 echo "Error: $con->error";
             }
-            echo "Added to cart";
+            echo "Item with ID '$productID' added to cart";
         }
     } else if ($queryType == "buyProduct") {
         $user_id = $_SESSION["user_id"];
@@ -64,13 +65,24 @@ if (isset($_GET['queryType'])) {
         $productDiscount = ($product["product_discount"] / 100) * $productPrice;
         $totalPrice = json_encode($productPrice - $productDiscount);
 
-        // save the order to the database
-        $sql = "INSERT INTO orders (user_id, product_ids, product_quantities, order_total_price) VALUES ($user_id, '$productID', '$quantity', $totalPrice)";
+        // save the order to the pending order table in database
+        $sql = "INSERT INTO pending_orders (user_id, product_ids, product_quantities, order_total_price) VALUES ($user_id, '$productID', '$quantity', $totalPrice)";
         $result = $con->query($sql);
         if (!$result) {
             echo "Order not placed. Error: $con->error";
         }
-        echo "Data received successfully!";
+        echo "Item with ID '$productID' placed in pending orders";
+    } else if ($queryType == "updateCart") {
+        $productID = isset($_GET['productID']) ? $_GET['productID'] : -1;
+        $quantity = isset($_GET['quantity']) ? $_GET['quantity'] : -1;
+        $user_id = $_SESSION["user_id"];
+
+        $sql = "UPDATE cart_items SET product_quantity = $quantity WHERE user_id = $user_id AND product_id = $productID";
+        $result = $con->query($sql);
+        if (!$result) {
+            echo "Error: $con->error";
+        }
+        echo "Quantity updated: $quantity";
     }
 }
 ?>

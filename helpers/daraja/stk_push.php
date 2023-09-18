@@ -1,19 +1,19 @@
 <?php
 include "access_token.php";
-include "../credentials.php";
+include "../credential.php";
 
 date_default_timezone_set('Africa/Nairobi');
 
 $processRequestURL = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
 $callBackURL = $NGROK_URL;
 $passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-$businessShortCode = "174379";
+$businessShortCode = "174379"; // PayBill Number or Till Number
 $timestamp = date("YmdHis");
 
 $password = base64_encode($businessShortCode . $passKey . $timestamp);
 $phone = "254704439347";
 $partyA = "254704439347";
-$partyB = "174379";
+$partyB = "174379"; // Where the money will be received
 $accountReference = "JetsupLTD";
 $transactionDesc = "Payment";
 $amount = "1";
@@ -39,7 +39,7 @@ $curl_post_data = array(
     'TransactionType' => 'CustomerPayBillOnline',
     'Amount' => $amount,
     'PartyA' => $partyA,
-    'partyB' => $partyB,
+    'PartyB' => $partyB,
     'PhoneNumber' => $phone,
     'CallBackURL' => $callBackURL,
     'AccountReference' => $accountReference,

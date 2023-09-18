@@ -63,9 +63,6 @@ if (isset($_GET['querySelectedItems'])) {
 <script src="index.js"></script>
 <script src="shop_helper.js"></script>
 <script>
-    // query all div elements
-    const cartItems = document.querySelectorAll("div[class='quantity-control']");
-    // console.log(cartItems);
     // get the ID of the div whose child was clicked
     document.addEventListener("click", function (e) {
         if (e.target.classList.contains("increment-button")) {
@@ -83,10 +80,10 @@ if (isset($_GET['querySelectedItems'])) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log("Update done!");
+                    console.log(this.responseText);
                 }
             };
-            xhttp.open("GET", "cart.php?productID=" + productID + "&quantity=" + quantity.innerText + "&querySelectedItems=" + 0, true);
+            xhttp.open("GET", "helpers/shop/checkout.php?queryType=updateCart&productID=" + productID + "&quantity=" + quantity.innerText, true);
             xhttp.send();
         } else if (e.target.classList.contains("decrement-button")) {
             // decrement the quantity
@@ -101,43 +98,16 @@ if (isset($_GET['querySelectedItems'])) {
                     totalPrice.innerText = parseFloat(totalPrice.innerText) - parseFloat(productPrice);
                 }
 
-                // TODO: Using AJAX, update the quantity column of the cart items table
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("Update done!");
+                        console.log(this.responseText);
                     }
                 };
-                xhttp.open("GET", "helpers/shop/checkout.php?queryType=addToCart&productID=" + productID + "&quantity=" + quantity.innerText, true);
+                xhttp.open("GET", "helpers/shop/checkout.php?queryType=updateCart&productID=" + productID + "&quantity=" + quantity.innerText, true);
                 xhttp.send();
             }
         }
-        // Process checkout
-        // if (e.target.id == "checkout-button" && document.querySelector(".total").innerText > 0) {
-        //     // get all the checked items
-        //     const checkedItems = document.querySelectorAll("input[class='checkout-box']:checked");
-        //     // get the productID and quantity of each checked item
-        //     var productIDs = [];
-        //     var quantities = [];
-        //     checkedItems.forEach(item => {
-        //         const productID = item.parentElement.id.replace("cart-item", "");
-        //         const quantity = item.parentElement.querySelector(".quantity").innerText;
-        //         productIDs.push(productID);
-        //         quantities.push(quantity);
-        //     });
-        //     // send the productIDs and quantities to the server
-        //     var xhttp = new XMLHttpRequest();
-        //     xhttp.onreadystatechange = function () {
-        //         if (this.readyState == 4 && this.status == 200) {
-        //             console.log("Checkout done!");
-        //             console.log(this.responseText);
-        //         }
-        //     };
-        //     var productIDsJSON = JSON.stringify(productIDs);
-        //     var quantitiesJSON = JSON.stringify(quantities);
-        //     xhttp.open("GET", "helpers/shop/checkout.php?queryType=checkout&productIDs=" + productIDsJSON + "&quantities=" + quantitiesJSON, true);
-        //     xhttp.send();
-        // }
     });
     // update the total price when the checkbox is checked
     document.addEventListener("change", function (e) {

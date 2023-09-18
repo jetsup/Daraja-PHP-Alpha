@@ -12,6 +12,7 @@ function addToCart(productID) {
   );
   xhttp.send();
 }
+
 function checkout() {
   // get all the checked items
   const checkedItems = document.querySelectorAll(
@@ -38,7 +39,7 @@ function checkout() {
   var quantitiesJSON = JSON.stringify(quantities);
   xhttp.open(
     "GET",
-    "helpers/shop/checkout.php?queryType=checkout&productIDs=" +
+    "helpers/shop/checkout.php?queryType=processPayment&productIDs=" +
       productIDsJSON +
       "&quantities=" +
       quantitiesJSON,
@@ -46,6 +47,7 @@ function checkout() {
   );
   xhttp.send();
 }
+
 function buyProduct(productID) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
