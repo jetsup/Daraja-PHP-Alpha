@@ -8,13 +8,14 @@ CREATE TABLE IF NOT EXISTS user_details(
     user_last_name VARCHAR(50) NOT NULL,
     user_email VARCHAR(60) NOT NULL UNIQUE,
     user_phone VARCHAR(20) NOT NULL UNIQUE,
+    payment_number VARCHAR(20) NOT NULL,
     user_state VARCHAR(50) NOT NULL,
     user_county VARCHAR(20) NOT NULL,
     user_town VARCHAR(50) NOT NULL
 );
 
-INSERT IGNORE INTO user_details (user_first_name, user_last_name, user_email, user_phone, user_state, user_county, user_town) VALUES
-('John', 'Doe', 'john.doe@email.com', '1234567890', 'State', 'County', 'Town');
+INSERT IGNORE INTO user_details (user_first_name, user_last_name, user_email, user_phone, payment_number, user_state, user_county, user_town) VALUES
+('John', 'Doe', 'john.doe@email.com', '123456789012', '123456789012', 'State', 'County', 'Town');
 
 CREATE TABLE users (
     user_log_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -67,15 +68,44 @@ CREATE TABLE IF NOT EXISTS cart_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
 
--- Table to handle user orders and the location of their deliveries
-CREATE TABLE IF NOT EXISTS orders (
-    order_id INT PRIMARY KEY AUTO_INCREMENT,
+-- Table for storing the orders before payment is made
+CREATE TABLE IF NOT EXISTS pending_orders (
+    pending_order_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     product_ids JSON NOT NULL,
     product_quantities JSON NOT NULL,
     order_total_price DECIMAL(10, 2) NOT NULL,
+    order_status ENUM('pending', 'paid') NOT NULL DEFAULT 'pending',
     order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE
+);
+
+-- Table to handle user orders and the location of their deliveries
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    pending_order_id INT NOT NULL,
+    payment_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (pending_order_id) REFERENCES pending_orders(pending_order_id) ON DELETE CASCADE
+);
+
+-- Create a trigger that is executed when order table is updated
+CREATE TRIGGER update_pending_order AFTER INSERT ON orders FOR EACH ROW
+BEGIN
+    UPDATE pending_orders SET order_status = 'paid' WHERE pending_order_id = NEW.pending_order_id;
+END;
+
+-- Table for storing transaction details
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    order_id INT NOT NULL,
+    transaction_code VARCHAR(50) NOT NULL UNIQUE,
+    transaction_amount DECIMAL(10, 2) NOT NULL,
+    transaction_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user_details(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
 );
 
 -- Table for the wishlist
