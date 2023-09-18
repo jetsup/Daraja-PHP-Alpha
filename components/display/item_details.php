@@ -18,7 +18,7 @@
         </s>
         <!-- Spacer -->
         <?php
-        if(isset($_SESSION["user_id"])) {
+        if (isset($_SESSION["user_id"])) {
             $user_id = $_SESSION["user_id"];
             // search if the user had added this product to the wishlist
             $sql = "SELECT * FROM wishlist WHERE user_id = $user_id AND product_id = $productID";
@@ -32,8 +32,8 @@
         ?>
     </p>
     <p>
-        <button onclick="addToCart()">Cart +</button>
-        <button onclick="processBuy()">Buy Now</button>
+        <button onclick="addToCart(<?php echo $productID; ?>)">Cart +</button>
+        <button onclick="buyProduct(<?php echo $productID; ?>)">Buy Now</button>
     </p>
 
 </div>

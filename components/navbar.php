@@ -15,6 +15,6 @@
             echo "<li><a href='signin.php' class='nav-link'>Sign in</a></li>";
         }
         ?>
-        <li><a href="daraja/access_token.php" class="nav-link">Token</a></li>
+        <li><a href="helpers/daraja/access_token.php" class="nav-link">Token</a></li>
     </ul>
 </div>

@@ -50,7 +50,7 @@ if (isset($_GET['querySelectedItems'])) {
         }
         echo "<p>Total: $<span id='total-price'>0.00</span></p>";
         echo "<p>Total Items: <span class='total'>$checkItems</span></p>";
-        echo "<button id='checkout-button'>Checkout ($checkItems)</button>";
+        echo "<button id='checkout-button' onclick='checkout()'>Checkout ($checkItems)</button>";
     } else {
         echo "<p>Your cart is empty.</p>";
     }
@@ -61,6 +61,7 @@ if (isset($_GET['querySelectedItems'])) {
     ?>
 </body>
 <script src="index.js"></script>
+<script src="shop_helper.js"></script>
 <script>
     // query all div elements
     const cartItems = document.querySelectorAll("div[class='quantity-control']");
@@ -107,40 +108,36 @@ if (isset($_GET['querySelectedItems'])) {
                         console.log("Update done!");
                     }
                 };
-                xhttp.open("GET", "cart.php?productID=" + productID + "&quantity=" + quantity.innerText + "&querySelectedItems=" + 0, true);
+                xhttp.open("GET", "helpers/shop/checkout.php?queryType=addToCart&productID=" + productID + "&quantity=" + quantity.innerText, true);
                 xhttp.send();
             }
         }
         // Process checkout
-        if (e.target.id == "checkout-button" && document.querySelector(".total").innerText > 0) {
-            // get all the checked items
-            const checkedItems = document.querySelectorAll("input[class='checkout-box']:checked");
-            // get the productID and quantity of each checked item
-            var productIDs = [];
-            var quantities = [];
-            checkedItems.forEach(item => {
-                const productID = item.parentElement.id.replace("cart-item", "");
-                const quantity = item.parentElement.querySelector(".quantity").innerText;
-                productIDs.push(productID);
-                quantities.push(quantity);
-            });
-            // send the productIDs and quantities to the server
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log("Checkout done!");
-                    // redirect to the checkout page
-                    // window.location.href = "checkout.php";
-                    console.log(this.responseText);
-                }
-            };
-            var productIDsJSON = JSON.stringify(productIDs);
-            var quantitiesJSON = JSON.stringify(quantities);
-            xhttp.open("GET", "components/shop/checkout.php?productIDs=" + productIDsJSON + "&quantities=" + quantitiesJSON + "&querySelectedItems=" + 1, true);
-            // xhttp.open("GET", "components/shop/checkout.php?productIDs=" + productIDs + "&quantities=" + quantities + "&querySelectedItems=" + 1, true);
-            console.log("components/shop/checkout.php?productIDs=" + productIDs + "&quantities=" + quantities + "&querySelectedItems=" + 1);
-            xhttp.send();
-        }
+        // if (e.target.id == "checkout-button" && document.querySelector(".total").innerText > 0) {
+        //     // get all the checked items
+        //     const checkedItems = document.querySelectorAll("input[class='checkout-box']:checked");
+        //     // get the productID and quantity of each checked item
+        //     var productIDs = [];
+        //     var quantities = [];
+        //     checkedItems.forEach(item => {
+        //         const productID = item.parentElement.id.replace("cart-item", "");
+        //         const quantity = item.parentElement.querySelector(".quantity").innerText;
+        //         productIDs.push(productID);
+        //         quantities.push(quantity);
+        //     });
+        //     // send the productIDs and quantities to the server
+        //     var xhttp = new XMLHttpRequest();
+        //     xhttp.onreadystatechange = function () {
+        //         if (this.readyState == 4 && this.status == 200) {
+        //             console.log("Checkout done!");
+        //             console.log(this.responseText);
+        //         }
+        //     };
+        //     var productIDsJSON = JSON.stringify(productIDs);
+        //     var quantitiesJSON = JSON.stringify(quantities);
+        //     xhttp.open("GET", "helpers/shop/checkout.php?queryType=checkout&productIDs=" + productIDsJSON + "&quantities=" + quantitiesJSON, true);
+        //     xhttp.send();
+        // }
     });
     // update the total price when the checkbox is checked
     document.addEventListener("change", function (e) {
