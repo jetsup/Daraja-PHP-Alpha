@@ -1,3 +1,4 @@
 TODOs
-helpers/credential.php
+credentials.php
+callback_url.php
 test.*

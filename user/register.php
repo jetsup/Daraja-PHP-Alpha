@@ -56,6 +56,7 @@ $con->close();
         <label for="user_email">Email:</label>
         <input type="email" id="user_email" name="user_email" required><br><br>
 
+        <!-- Add pre *country code -->
         <label for="user_phone">Phone:</label>
         <input type="text" id="user_phone" name="user_phone" required><br><br>
 
@@ -90,4 +91,5 @@ $con->close();
         }
     }
 </script>
+
 </html>

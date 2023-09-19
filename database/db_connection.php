@@ -1,5 +1,5 @@
 <?php
-include "../helpers/credentials.php";
+include "credentials.php";
 // change the values below to match your database settings
 $database_username = $DATABASE_USERNAME;
 $database_password = $DATABASE_PASSWORD;

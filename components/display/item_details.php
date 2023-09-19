@@ -31,9 +31,15 @@
         }
         ?>
     </p>
+    <?php
+    if (isset($_SESSION["user_id"])) {
+        echo "<p>";
+        echo "<button onclick='addToCart($productID)'>Cart +</button>";
+        echo "<button onclick='buyProduct($productID)'>Buy Now</button>";
+        echo "</p>";
+    }
+    ?>
     <p>
-        <button onclick="addToCart(<?php echo $productID; ?>)">Cart +</button>
-        <button onclick="buyProduct(<?php echo $productID; ?>)">Buy Now</button>
+        <?php echo $productDescription; ?>
     </p>
-
 </div>
