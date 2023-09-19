@@ -10,11 +10,13 @@
         </s>
         <?php
         if (isset($_SESSION["user_id"])) {
-            echo "<span><button onclick='addToCart()'>Cart +</button><button onclick='processBuy()'>Buy Now</button></span>";
+            echo "<span><button onclick='addToCart($productID)'>Cart +</button><button onclick='buyProduct($productID)'>Buy Now</button></span>";
         }
         ?>
     </p>
-    <p><b>
+    <p>
+        <b>
             <?php echo $productDescription; ?>
-        </b></p>
+        </b>
+    </p>
 </div>

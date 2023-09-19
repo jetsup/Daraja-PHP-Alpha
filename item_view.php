@@ -73,7 +73,13 @@ $productID = isset($_GET['productID']) ? $_GET['productID'] : -1;
         // like = 1 -> unlike
         // like = 0 -> like
         var productID = <?php echo $productID; ?>;
-        var userID = <?php echo $_SESSION["user_id"]; ?>;
+        var userID = <?php
+        if (isset($_SESSION["user_id"])) {
+            echo $_SESSION["user_id"];
+        } else {
+            echo -1;
+        }
+        ?>;
         console.log("ProductID: " + productID + " UserID: " + userID + " Like: " + like);
         var like = like;
         var xhttp = new XMLHttpRequest();

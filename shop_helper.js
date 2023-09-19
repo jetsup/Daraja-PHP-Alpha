@@ -49,6 +49,8 @@ function checkout() {
 }
 
 function buyProduct(productID) {
+  var confirmation = confirm("Are you sure you want to buy this product?");
+  if (confirmation) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -61,4 +63,5 @@ function buyProduct(productID) {
       true
     );
     xhttp.send();
+  }
 }

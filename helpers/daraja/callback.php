@@ -9,7 +9,7 @@ error_log(print_r($data, true), 0);
 
 $merchantRequestID = $responseJSON['Body']['stkCallback']['MerchantRequestID'];
 $checkoutRequestID = $responseJSON['Body']['stkCallback']['CheckoutRequestID'];
-$resultCode = $responseJSON['Body']['stkCallback']['ResultCode'];
+$resultCode = $responseJSON['Body']['stkCallback']['ResultCode']; // check if the payment was successful
 $resultDesc = $responseJSON['Body']['stkCallback']['ResultDesc'];
 $item = $responseJSON['Body']['stkCallback']['CallbackMetadata']['Item'];
 

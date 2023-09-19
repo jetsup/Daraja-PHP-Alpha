@@ -58,13 +58,19 @@ if (isset($_GET['queryType'])) {
         $user_id = $_SESSION["user_id"];
         $productID = json_encode(isset($_GET['productID']) ? $_GET['productID'] : -1);
         $quantity = json_encode(1);
+        // check if there is a similar order in pending_orders
+        $sql = "SELECT * FROM pending_orders WHERE user_id = $user_id AND product_ids = '$productID'";
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            echo "Item with ID '$productID' already in pending orders";
+            return;
+        }
         // get the product price
         $sql = "SELECT * FROM products WHERE product_id = $productID";
         $product = $con->query($sql)->fetch_assoc();
         $productPrice = $product["product_price"];
         $productDiscount = ($product["product_discount"] / 100) * $productPrice;
         $totalPrice = json_encode($productPrice - $productDiscount);
-
         // save the order to the pending order table in database
         $sql = "INSERT INTO pending_orders (user_id, product_ids, product_quantities, order_total_price) VALUES ($user_id, '$productID', '$quantity', $totalPrice)";
         $result = $con->query($sql);
