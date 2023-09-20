@@ -67,9 +67,9 @@ nav {
 
 .product-description-home{
     white-space: nowrap; 
-  width: 40%; 
+  width: inherit; 
   overflow: hidden;
   text-overflow: ellipsis; 
-  /* border: 1px solid #000000; */
+  border: 1px solid #000000;
 
 } 
