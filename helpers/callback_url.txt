@@ -1,0 +1,4 @@
+<?php
+// URL for the callback for the DARAJA API
+$NGROK_URL = "https://6434-102-217-157-227.ngrok-free.app/Jack-Daniels/helpers/daraja/callback.php";
+?>

@@ -8,22 +8,21 @@ if (isset($_COOKIE["product_to_cart_cookie"])) {
 
     // check if the item is in the cart
     $sql = "SELECT * FROM cart_items WHERE user_id = $user_id AND product_id = $productID";
-    $result = $con ->query($sql);
+    $result = $con->query($sql);
     if ($result->num_rows > 0) {
         // the item is already in the cart
-        echo "<script>console.log('Item already in cart')</script>";
+        echo "Item already in cart";
         // unset($_COOKIE["product_to_cart_cookie"]);
         // return;
     } else {
         $sql = "INSERT INTO cart_items (user_id, product_id) VALUES ($user_id, $productID)";
-        echo "<script>console.log('SQL: $sql')</script>";
         if (!$con->query($sql)) {
-            echo "<script>console.log('Error: $con->error')</script>";
+            echo "Error: $con->error";
             unset($_COOKIE["product_to_cart_cookie"]);
         }
         setcookie("product_to_cart_cookie", "", time() - 3600);
         // using an alert dialog, ask if the user want to redirect to the cart page or stay on the same page
-        echo "<script>console.log('Added to cart')</script>";
+        echo "Added to cart";
     }
     unset($_COOKIE["product_to_cart_cookie"]);
 }
@@ -68,29 +67,28 @@ $productID = isset($_GET['productID']) ? $_GET['productID'] : -1;
     include 'components/footer.php';
     ?>
 </body>
+<script src="shop_helper.js"></script>
 <script>
-    function addToCart() {
-        document.cookie = "product_to_cart_cookie=<?php echo $productID; ?>";
-        // reload the page so that the cookie will e processed by php, use AJAX later
-        location.reload();
-    }
-    function processBuy() {
-        window.location.href = "checkout.php";
-    }
     function toggleWishlist(like) {
         // like = 1 -> unlike
         // like = 0 -> like
         var productID = <?php echo $productID; ?>;
-        var userID = <?php echo $_SESSION["user_id"]; ?>;
+        var userID = <?php
+        if (isset($_SESSION["user_id"])) {
+            echo $_SESSION["user_id"];
+        } else {
+            echo -1;
+        }
+        ?>;
         console.log("ProductID: " + productID + " UserID: " + userID + " Like: " + like);
         var like = like;
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 location.reload();
             }
         };
-        xhttp.open("GET", "components/shop/wishlist.php?productID=" + productID + "&userID=" + userID, true);
+        xhttp.open("GET", "helpers/shop/wishlist.php?productID=" + productID, true);
         xhttp.send();
     }
 </script>

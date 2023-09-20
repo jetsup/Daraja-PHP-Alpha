@@ -42,6 +42,7 @@ include 'database/db_connection.php';
     ?>
 </body>
 <script src="index.js"></script>
+<script src="shop_helper.js"></script>
 <script>
     function viewDetails(productID) {
         window.location.href = "item_view.php?productID=" + productID;

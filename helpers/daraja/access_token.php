@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $consumerKey = "1qwAddeGPAAnYd9UAaGE3iTBI4ZVbxFk";
 $consumerSecret = "q7kupYcdzXjNxuVr";
 $accessTokenURL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
@@ -16,6 +18,5 @@ $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 $result = json_decode($result);
 $access_token = $result->access_token;
 
-echo $access_token, "<br>";
 curl_close($curl);
 ?>

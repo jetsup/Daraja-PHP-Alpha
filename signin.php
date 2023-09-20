@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $result->fetch_all();
     $user_id = $result[0][0];
     $user_password = $result[0][2];
-    
+
     echo "<script>console.log('Username: $username Password: $password DBPassword: $user_password UserID: $user_id')</script>";
-    
+
     if (count($result) == 1) {
         // Verify the password
         if ($password === $user_password) {
@@ -48,6 +48,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <header>
+        <nav>
+            <a href="index.php"><span><img src="resources/icons/cart-96.png" alt="Company Logo"></span><span>Home</span></a>
+        </nav>
+    </header>
     <h2>Login</h2>
     <?php
     if (isset($error_message)) {
