@@ -14,14 +14,14 @@
         <td><a href="contacts.php" class="nav-link">Contacts</a></td>
         <?php
         if (isset($_SESSION["user_id"])) {
-            echo "<li><a href='cart.php' class='nav-link'>Cart</a></li>";
+            echo "<td><a href='cart.php' class='nav-link'>Cart</a></td>";
             // TODO: replace signout with profile, there there will be a sign out link and other custom settings the user can change
             // echo "<li><a href='signout.php' class='nav-link'>Sign out</a></li>";
-            echo "<li><a href='user.php' class='nav-link'>Profile</a></li>";
+            echo "<td><a href='user.php' class='nav-link'>Profile</a></td>";
         } else {
-            echo "<li><a href='signin.php' class='nav-link'>Sign in</a></li>";
+            echo "<td><a href='signin.php' class='nav-link'>Sign in</a></td>";
         }
         ?>
-        <li><a href="daraja/access_token.php" class="nav-link">Token</a></li>
-    </ul>
+        <td><a href="daraja/access_token.php" class="nav-link">Token</a></td>
+    </tr>
 </div>
