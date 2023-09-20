@@ -1,5 +1,5 @@
 <div class="item" id="<?php echo $buttonID; ?>" onclick="viewDetails(<?php echo $productID; ?>)">
-    <img src="<?php echo $productImageURL ?>" alt="Product Image">
+    <img class="product-image-home" src="<?php echo $productImageURL ?>" alt="Product Image">
     <h3>
         <?php echo $productName; ?>
     </h3>
@@ -9,7 +9,7 @@
             <?php echo $productPreviousPrice; ?>
         </s>
     </p>
-    <p><b>
+    <p class= "product-description-home"><b>
             <?php echo $productDescription; ?>
         </b></p>
 </div>
