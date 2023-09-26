@@ -15,7 +15,7 @@ body{
     font-size: 24px;
 }
 /* Reset default list styles */
-ul {
+/* ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -73,3 +73,9 @@ nav {
   border: 1px solid #000000;
 
 } 
+/* .logo{
+    color: aquamarine;
+    text-align: left;
+    text-decoration: wavy;
+    text-shadow: #fff;
+} */

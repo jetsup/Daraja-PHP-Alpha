@@ -1,12 +1,6 @@
-<div class="navbar">
-    <table>
-        <td>
-            <tr>
-            <h1>Jack-Daniels </h1>
-            </tr>
-        </td>
-    </table>
-    <tr>
+<h1 class="logo">Jack-Daniels</h1>
+<div>
+    <tr class="navbar">
         <td><a href="index.php" class="nav-link">Home</a></td>
         <td><a href="products.php" class="nav-link">Products and Services</a></td>
         <td><a href="about.php" class="nav-link">About Us</a></td>
