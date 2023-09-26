@@ -12,9 +12,10 @@ body{
     align-items: center;
     /* Center align vertically within the navbar */
     padding: 10px 0;
+    font-size: 24px;
 }
 /* Reset default list styles */
-ul {
+/* ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -40,3 +41,41 @@ nav {
     /* Change to the color you want for the active tab */
     border-radius: 5px;
 }
+.product-image-home{
+    width: inherit;
+    height: inherit;
+}
+.products-home-div {
+    display: flex; /* Use flexbox to create a row layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if the screen is too narrow */
+    justify-content: space-between; /* Distribute space evenly between items */
+    /* align-items: ; */
+}
+.item{
+    /* width: 40%;
+    height: 15%; */
+    /* display: flex; */
+    /* text-overflow: ellipsis; */
+    width: calc(33.33% - 20px); /* Adjust the width as needed (this example assumes 3 items per row) */
+    /* height: 20px; */
+    margin-right: 1px; /* Add margin between items */
+    padding: 10px; /* Add padding for spacing */
+    border: 1px solid #6f9605b0; /* Add borders for visual separation */
+    margin-bottom: 10px; /*separates items vertically*/
+    box-sizing: border-box;
+}
+
+.product-description-home{
+    white-space: nowrap; 
+  width: inherit; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  border: 1px solid #000000;
+
+} 
+/* .logo{
+    color: aquamarine;
+    text-align: left;
+    text-decoration: wavy;
+    text-shadow: #fff;
+} */

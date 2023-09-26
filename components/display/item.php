@@ -1,6 +1,6 @@
-<div class="item" id="<?php echo $buttonID; ?>">
-    <img src="<?php echo $productImageURL ?>" alt="Product Image" onclick="viewDetails(<?php echo $productID; ?>)">
-    <h3 onclick="viewDetails(<?php echo $productID; ?>)">
+<div class="item" id="<?php echo $buttonID; ?>" onclick="viewDetails(<?php echo $productID; ?>)">
+    <img class="product-image-home" src="<?php echo $productImageURL ?>" alt="Product Image">
+    <h3>
         <?php echo $productName; ?>
     </h3>
     <p>$
@@ -14,7 +14,7 @@
         }
         ?>
     </p>
-    <p>
+    <p class="product-description-home">
         <b>
             <?php echo $productDescription; ?>
         </b>

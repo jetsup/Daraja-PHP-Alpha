@@ -19,6 +19,7 @@ include 'database/db_connection.php';
     
     $sql = "SELECT * from products";
     $result = $con->query($sql);
+    echo "<div class='products-home-div'>";
     while ($row = $result->fetch_assoc()) {
         $productID = $row["product_id"];
         $productImageURL = $row["product_image_url"];
@@ -34,6 +35,7 @@ include 'database/db_connection.php';
 
         include "components/display/item.php";
     }
+    echo "</div>";
     ?>
     <?php
     include 'components/footer.php';
