@@ -1,4 +1,4 @@
-# Jack-Daniels
+# Daraja-PHP-Alpha
 
 E-commerce website demo
 
