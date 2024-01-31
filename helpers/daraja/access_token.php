@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$consumerKey = "1qwAddeGPAAnYd9UAaGE3iTBI4ZVbxFk";
-$consumerSecret = "q7kupYcdzXjNxuVr";
+$consumerKey = "CONSUMER KEY";
+$consumerSecret = "CONSUMER SECRET";
 $accessTokenURL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
 
 $headers = ['Content-Type:application/json; charset=utf8'];
