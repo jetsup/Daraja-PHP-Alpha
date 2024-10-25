@@ -16,6 +16,6 @@
             echo "<td><a href='signin.php' class='nav-link'>Sign in</a></td>";
         }
         ?>
-        <td><a href="daraja/access_token.php" class="nav-link">Token</a></td>
+        <td><a href="helpers/daraja/access_token.php" class="nav-link">Token</a></td>
     </tr>
 </div>

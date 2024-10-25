@@ -1,9 +1,11 @@
 <?php
 include "credentials.php";
-// change the values below to match your database settings
-$database_username = $DATABASE_USERNAME;
-$database_password = $DATABASE_PASSWORD;
-$database_name = "jack_daniels";
-$database_host = "localhost";
-$con = new mysqli($database_host, $database_username, $database_password, $database_name);
-?>
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL);
+
+try {
+    $con = new mysqli($DATABASE_HOST, $DATABASE_USERNAME, 
+    $DATABASE_PASSWORD, $DATABASE_DB, $DATABASE_PORT, $DATABASE_SOCKET);
+} catch (mysqli_sql_exception $e) {
+    echo "Error: " . $e->getMessage();
+}

@@ -1,21 +1,22 @@
 <?php
 include "access_token.php";
-include "../credential.php";
+include "daraja_credentials.php";
 
 date_default_timezone_set('Africa/Nairobi');
 
-$processRequestURL = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
+$processRequestURL = $PROCESS_REQUEST_URL;
 $callBackURL = $NGROK_URL;
-$passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-$businessShortCode = "174379"; // PayBill Number or Till Number
+$passKey = $PASS_KEY;
+$businessShortCode = $BUSINESS_USE_TILL ? $BUSINESS_TILL_NUMBER : $BUSINESS_SHORTCODE; // PayBill Number or Store Number for Till Number
 $timestamp = date("YmdHis");
 
 $password = base64_encode($businessShortCode . $passKey . $timestamp);
 $phone = "254704439347";
-$partyA = "254704439347";
-$partyB = "174379"; // Where the money will be received
-$accountReference = "JetsupLTD";
-$transactionDesc = "Payment";
+
+$partyA = $BUSINESS_SHORTCODE;
+$partyB = $BUSINESS_USE_TILL ? $BUSINESS_TILL_NUMBER : $BUSINESS_SHORTCODE;
+$accountReference = $ACCOUNT_REFERENCE;
+$transactionDesc = $PAYMENT_DESCRIPTION;
 $amount = "1";
 $stkPushHeader = ['Content-Type:application/json', 'Authorization:Bearer ' . $access_token];
 

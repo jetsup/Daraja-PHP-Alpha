@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_town = $_POST["user_town"];
 
     // Insert user data into the database
-    $sql = "INSERT INTO user_details (user_first_name, user_last_name, user_email, user_phone, user_state, user_county, user_town)
-            VALUES ('$user_first_name', '$user_last_name', '$user_email', '$user_phone', '$user_state', '$user_county', '$user_town')";
+    $sql = "INSERT INTO user_details (user_first_name, user_last_name, user_email, user_phone, payment_number, user_state, user_county, user_town)
+            VALUES ('$user_first_name', '$user_last_name', '$user_email', '$user_phone', '$user_phone', '$user_state', '$user_county', '$user_town')";
 
     if ($con->query($sql) === TRUE) {
         echo "Registration successful!";
@@ -24,8 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $m_user_id = $row["user_id"];
         $_SESSION["registration_user_id"] = $m_user_id;
-        header("Location: create_user.php");
-        exit();
+        // header("Location: create_user.php");
+
+        // load index.php
+        header("Location: ../index.php");
+        
     } else {
         echo "Error: " . $sql . "<br>" . $con->error;
     }

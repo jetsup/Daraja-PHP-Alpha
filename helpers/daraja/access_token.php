@@ -1,9 +1,10 @@
 <?php
 session_start();
+include "daraja_credentials.php";
 
-$consumerKey = "CONSUMER KEY";
-$consumerSecret = "CONSUMER SECRET";
-$accessTokenURL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+$consumerKey = $CONSUMER_KEY;
+$consumerSecret = $CONSUMER_SECRET;
+$accessTokenURL = $ACCESS_TOKEN_URL;//"https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
 
 $headers = ['Content-Type:application/json; charset=utf8'];
 
@@ -19,4 +20,3 @@ $result = json_decode($result);
 $access_token = $result->access_token;
 
 curl_close($curl);
-?>
